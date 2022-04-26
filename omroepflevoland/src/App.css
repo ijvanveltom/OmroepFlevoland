@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+.quill {
+  width:100% !important;
+  height:calc(100% - 42px) !important;
+}
