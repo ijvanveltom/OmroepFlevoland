@@ -37,7 +37,7 @@
   }
 }
 
-.quill {
+.quill, .text-editor {
   width:100% !important;
   height:calc(100% - 42px) !important;
 }
