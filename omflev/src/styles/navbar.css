@@ -16,3 +16,12 @@ a {
     text-decoration: none;
     padding: 0.5rem;
 }
+
+.logo {
+    height: 20px;
+}
+
+.timer {
+    color: antiquewhite;
+    text-align: center;
+}
