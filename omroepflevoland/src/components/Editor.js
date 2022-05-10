@@ -35,7 +35,7 @@ class Editor extends React.Component {
 
   render() {
     return (
-      <div className="text-editor">
+      <div className="text-editor leftEditorFix">
         <CustomToolbar />
         <ReactQuill
           onChange={this.handleChange}

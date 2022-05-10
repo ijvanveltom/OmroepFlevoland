@@ -14,7 +14,7 @@ import Campaign from '@mui/icons-material/Campaign';
 import CalendarMonth from '@mui/icons-material/CalendarMonth';
 import PermMedia from '@mui/icons-material/PermMedia';
 
-import ReactQuill from 'react-quill';
+//import ReactQuill from 'react-quill';
 import Editor from './components/Editor.js';
 import EditorWithTabs from './components/EditorWithTabs.js';
 import 'react-quill/dist/quill.snow.css';
@@ -116,7 +116,7 @@ function App() {
                 <Editor placeholder={"Begin een verhaal..."} theme="snow" value={valueLeft} onChange={setValueLeft} sx={{width: '100%', height: '100%',}}/>
               </Box>
               <Box sx={{display: 'flex', width:'50%', height: '100%', overflow: 'auto',}}>
-                <ReactQuill placeholder={"Begin een verhaal..."} theme="snow" value={valueRight} onChange={setValueRight} sx={{width: '100%', height: '100%',}}/>
+                <EditorWithTabs placeholder={"Begin een verhaal..."} theme="snow" value={valueRight} onChange={setValueRight} sx={{width: '100%', height: '100%',}}/>
               </Box>
             </Box>
           </Box>

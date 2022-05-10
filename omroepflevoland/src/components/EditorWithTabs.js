@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
 
-const CustomButton = () => <span>TV</span>;
+const CustomTab = () => <span>TV</span>;
 
 function fullScreen() {
   const cursorPosition = this.quill.getSelection().index;
@@ -9,15 +9,15 @@ function fullScreen() {
   this.quill.setSelection(cursorPosition + 1);
 }
 
-const CustomToolbar = () => (
-  <div id="toolbar">
+const CustomToolbarTabs = () => (
+  <div id="toolbartabs">
     <button className="ql-bold" />
     <button className="ql-italic" />
     <button className="ql-underline" />
     <button className="ql-list" value="bullet" />
     <button className="ql-link" />
     <button className="ql-fullScreen">
-      <CustomButton />
+      <CustomTab />
     </button>
   </div>
 );
@@ -36,7 +36,7 @@ class EditorWithTabs extends React.Component {
   render() {
     return (
       <div className="text-editor">
-        <CustomToolbar />
+        <CustomToolbarTabs />
         <ReactQuill
           onChange={this.handleChange}
           placeholder={this.props.placeholder}
@@ -55,10 +55,7 @@ class EditorWithTabs extends React.Component {
  */
 EditorWithTabs.modules = {
   toolbar: {
-    container: "#toolbar",
-    handlers: {
-      fullScreen: fullScreen
-    }
+    container: "#toolbartabs",
   },
   clipboard: {
     matchVisual: false,

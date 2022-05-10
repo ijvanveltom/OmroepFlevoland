@@ -39,7 +39,26 @@
 
 .quill, .text-editor {
   width:100% !important;
-  height:calc(100% - 42px) !important;
+  height:calc(100% - 26px) !important;
+}
+
+#toolbar {
+  border:1px solid #c4c4c4 !important;
+}
+
+#toolbartabs {
+  border:0px !important;
+  border-top:1px solid #c4c4c4 !important;
+  border-bottom:1px solid #c4c4c4 !important;
+}
+
+.ql-container.ql-snow {
+  border:0px !important;
+}
+
+.leftEditorFix > .quill > .ql-container {
+  border-left:1px solid #c4c4c4 !important;
+  border-right:1px solid #c4c4c4 !important;
 }
 
 .ql-tooltip {
