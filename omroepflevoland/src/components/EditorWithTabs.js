@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
 
-const CustomButton = () => <span>F</span>;
+const CustomButton = () => <span>TV</span>;
 
 function fullScreen() {
   const cursorPosition = this.quill.getSelection().index;
@@ -22,7 +22,7 @@ const CustomToolbar = () => (
   </div>
 );
 
-class Editor extends React.Component {
+class EditorWithTabs extends React.Component {
   constructor(props) {
     super(props);
     this.state = { editorHtml: "" };
@@ -40,8 +40,8 @@ class Editor extends React.Component {
         <ReactQuill
           onChange={this.handleChange}
           placeholder={this.props.placeholder}
-          modules={Editor.modules}
-          formats={Editor.formats}
+          modules={EditorWithTabs.modules}
+          formats={EditorWithTabs.formats}
           theme={"snow"} // pass false to use minimal theme
         />
       </div>
@@ -53,7 +53,7 @@ class Editor extends React.Component {
  * Quill modules to attach to editor
  * See https://quilljs.com/docs/modules/ for complete options
  */
-Editor.modules = {
+EditorWithTabs.modules = {
   toolbar: {
     container: "#toolbar",
     handlers: {
@@ -69,7 +69,7 @@ Editor.modules = {
  * Quill editor formats
  * See https://quilljs.com/docs/formats/
  */
-Editor.formats = [
+EditorWithTabs.formats = [
   "header",
   "font",
   "size",
@@ -86,4 +86,4 @@ Editor.formats = [
   "color"
 ];
 
-export default Editor;
+export default EditorWithTabs;
