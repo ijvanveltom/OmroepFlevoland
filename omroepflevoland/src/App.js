@@ -10,6 +10,10 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 
+import Campaign from '@mui/icons-material/Campaign';
+import CalendarMonth from '@mui/icons-material/CalendarMonth';
+import PermMedia from '@mui/icons-material/PermMedia';
+
 import ReactQuill from 'react-quill';
 import Editor from './components/Editor.js';
 import EditorWithTabs from './components/EditorWithTabs.js';
@@ -49,20 +53,20 @@ function App() {
 
   return (
     <div className="App">
-        <Toolbar position="absolute" sx={{height: '7vh', overflow: 'hidden',}}>
+        <Toolbar position="absolute" sx={{height: '7vh', overflow: 'hidden', backgroundColor: 'primary.main', color: 'white',}}>
           <h1>Dashboard </h1>
         </Toolbar>
         <Box sx={{width:'100%', height: '93vh', overflow: 'hidden', display: 'flex',}}>
-          <Box sx={{width:'4%', height: '100%', overflow: 'auto', backgroundColor: 'primary.light'}}>
+          <Box sx={{width:'4%', height: '100%', overflow: 'auto', borderTop: '1px solid #c4c4c4', borderRight: '1px solid #c4c4c4',}}>
+            <Button variant="text" size="large" aria-label="nieuws" sx={{width:'100%', height: '76px', color: 'primary.main',}}><Campaign/></Button>
+            <Button variant="text" size="large" aria-label="planner" sx={{width:'100%', height: '76px', color: 'primary.main',}}><CalendarMonth/></Button>
+            <Button variant="text" size="large" aria-label="media" sx={{width:'100%', height: '76px', color: 'primary.main',}}><PermMedia/></Button>
           </Box>
-          <Box sx={{width:'20%', height: '100%', overflow: 'auto',}}>
+          <Box sx={{width:'20%', height: '100%', overflow: 'auto', borderTop: '1px solid #c4c4c4',}}>
             <Button variant="contained">Hello World</Button>
           </Box>
-          <Box sx={{width:'76%', height: '100%', overflow: 'hidden',}}>
-            <Box sx={{width:'100%', height: '30%', overflow: 'auto', textAlign: 'left', paddingTop: '10px', paddingBottom: '10px'}}>
-              <Box sx={{height: '30px', overflow: 'hidden', textAlign: 'left', paddingLeft: '10px', paddingTop: '8px', marginBottom: '20px', backgroundColor: 'primary.light'}}>
-                Nieuw Story
-              </Box>
+          <Box sx={{width:'76%', height: '100%', overflow: 'hidden', borderTop: '1px solid #c4c4c4',}}>
+            <Box sx={{width:'100%', height: '200px', overflow: 'auto', textAlign: 'left', paddingLeft: '10px', paddingTop: '10px', borderLeft: '1px solid #c4c4c4',}}>
                 <TextField InputLabelProps={{required: true}} id="outlined-basic" label="Titel" variant="outlined" sx={{width:'500px', marginRight: '10px', marginBottom: '10px',}}/>
                 <TextField type="date" InputLabelProps={{shrink: true, required: true}} defaultValue={materialDateInput } id="outlined-basic" label="Datum" variant="outlined" sx={{width:'200px', marginRight: '10px', marginBottom: '10px',}}/>
                 <TextField type="time" InputLabelProps={{shrink: true}} defaultValue="03:00" id="outlined-basic" label="Tijd" variant="outlined" sx={{width:'200px', marginRight: '10px', marginBottom: '10px',}}/>
@@ -107,7 +111,7 @@ function App() {
                 </FormControl>
                 <TextField id="outlined-basic" label="Notitie" variant="outlined" sx={{width:'970px', marginRight: '10px', marginBottom: '10px',}}/>
             </Box>
-            <Box sx={{display: 'flex', flexDirection: 'row', width:'100%', height: '70%', overflow: 'hidden',}}>
+            <Box sx={{display: 'flex', flexDirection: 'row', width:'100%', height: 'calc(100% - 200px)', overflow: 'hidden',}}>
               <Box sx={{display: 'flex', width:'50%', height: '100%', overflow: 'auto',}}>
                 <Editor placeholder={"Begin een verhaal..."} theme="snow" value={valueLeft} onChange={setValueLeft} sx={{width: '100%', height: '100%',}}/>
               </Box>
