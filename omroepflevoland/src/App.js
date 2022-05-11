@@ -1,12 +1,7 @@
-//import React, { useState } from "react";
-import './App.css';
-import {db} from './firebase'
-import {collection, addDoc, Timestamp, query, orderBy, onSnapshot} from 'firebase/firestore'
-import Modal from "./Modal"
-import React, {useState, useEffect} from 'react'
-import AddTask from './components/AddTask.js'
-import Task from './Task'
+import React, { useState, useEffect } from "react";
+import './styles/App.css';
 
+//import Mui components
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,11 +10,21 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
+import SideBarDrawer from './components/SideBarDrawer';
 
-import ReactQuill from 'react-quill';
-import Editor from './components/Editor.js';
-import EditorWithTabs from './components/EditorWithTabs.js';
+//import icons
+
+//import ReactQuill components
+import Editor from './components/Editor';
+import EditorWithTabs from './components/EditorWithTabs';
 import 'react-quill/dist/quill.snow.css';
+
+//import Firebase components
+import {db} from './components/firebase'
+import {collection, addDoc, Timestamp, query, orderBy, onSnapshot} from 'firebase/firestore'
+import Modal from "./components/Modal"
+import AddTask from './components/AddTask'
+import Task from './components/Task'
 
 function App(onClick, open) {
   //Metadata values
@@ -53,37 +58,37 @@ function App(onClick, open) {
   const [valueLeft, setValueLeft] = useState('');
   const [valueRight, setValueRight] = useState('');
 
-    //data values
-const [title, setTitle] = useState('')
+  //Data values
+  const [title, setTitle] = useState('')
 
-const handleSubmit = async (e) => {
-  e.preventDefault()
-  try {
-    await addDoc(collection(db, 'tasks'), {
-      title: title,
-    })
-   // onClose()
-  } catch (err) {
-    alert(err)
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      await addDoc(collection(db, 'tasks'), {
+        title: title,
+      })
+    // onClose()
+    } catch (err) {
+      alert(err)
+    }
   }
-}
 
-//taskmanager.js
-const [openAddModal, setOpenAddModal] = useState(false)
-const [tasks, setTasks] = useState([])
+  //taskmanager.js
+  const [openAddModal, setOpenAddModal] = useState(false)
+  const [tasks, setTasks] = useState([])
 
-/* function to get all tasks from firestore in realtime */ 
-useEffect(() => {
-  const taskColRef = query(collection(db, 'tasks'), orderBy('created', 'desc'))
-  onSnapshot(taskColRef, (snapshot) => {
-    setTasks(snapshot.docs.map(doc => ({
-      id: doc.id,
-      data: doc.data()
-    })))
-  })
-},[])
+  //Function to get all tasks from firestore in realtime 
+  useEffect(() => {
+    const taskColRef = query(collection(db, 'tasks'), orderBy('created', 'desc'))
+    onSnapshot(taskColRef, (snapshot) => {
+      setTasks(snapshot.docs.map(doc => ({
+        id: doc.id,
+        data: doc.data()
+      })))
+    })
+  },[])
 
-
+  //Main page
   return (
     <div className="App">
         <Toolbar position="absolute" sx={{height: '7vh', overflow: 'hidden',}}>
@@ -166,37 +171,37 @@ useEffect(() => {
                     <MenuItem value={40}>Story</MenuItem>
                     <MenuItem value={50}>Varia</MenuItem>
                   </Select>
-                </FormControl>
-                <br></br>
-                <TextField id="outlined-basic" defaultValue={userName} label="Auteur" variant="outlined" sx={{width:'350px', marginRight: '10px', marginBottom: '10px',}}/>
-                <TextField id="outlined-basic" label="Locatie" variant="outlined" sx={{width:'200px', marginRight: '10px', marginBottom: '10px',}}/>
-                <TextField id="outlined-basic" label="Contact" variant="outlined" sx={{width:'560px', marginRight: '10px', marginBottom: '10px',}}/>
-                <br></br>
-                <FormControl>
-                  <InputLabel id="select-label">Status</InputLabel>
-                  <Select
-                    sx={{width:'150px', marginRight: '10px', marginBottom: '10px',}}
-                    labelId="status-select-label"
-                    id="status-select"
-                    value={status}
-                    label="Status"
-                    onChange={handleStatusChange}
-                  >
-                    <MenuItem value={10}>Uitzoeken</MenuItem>
-                    <MenuItem value={20}>Bellen</MenuItem>
-                    <MenuItem value={30}>Meenemen</MenuItem>
-                    <MenuItem value={40}>Productie</MenuItem>
-                    <MenuItem value={50}>Niet</MenuItem>
-                  </Select>
-                </FormControl>
-                <TextField id="outlined-basic" label="Notitie" variant="outlined" sx={{width:'970px', marginRight: '10px', marginBottom: '10px',}}/>
+                  </FormControl>
+              <br></br>
+              <TextField id="outlined-basic" defaultValue={userName} label="Auteur" variant="outlined" sx={{width:'350px', marginRight: '10px', marginBottom: '10px',}}/>
+              <TextField id="outlined-basic" label="Locatie" variant="outlined" sx={{width:'200px', marginRight: '10px', marginBottom: '10px',}}/>
+              <TextField id="outlined-basic" label="Contact" variant="outlined" sx={{width:'560px', marginRight: '10px', marginBottom: '10px',}}/>
+              <br></br>
+              <FormControl>
+                <InputLabel id="select-label">Status</InputLabel>
+                <Select
+                  sx={{width:'150px', marginRight: '10px', marginBottom: '10px',}}
+                  labelId="status-select-label"
+                  id="status-select"
+                  value={status}
+                  label="Status"
+                  onChange={handleStatusChange}
+                >
+                  <MenuItem value={10}>Uitzoeken</MenuItem>
+                  <MenuItem value={20}>Bellen</MenuItem>
+                  <MenuItem value={30}>Meenemen</MenuItem>
+                  <MenuItem value={40}>Productie</MenuItem>
+                  <MenuItem value={50}>Niet</MenuItem>
+                </Select>
+              </FormControl>
+              <TextField id="outlined-basic" label="Notitie" variant="outlined" sx={{width:'970px', marginRight: '10px', marginBottom: '10px',}}/>
+          </Box>
+          <Box sx={{display: 'flex', flexDirection: 'row', width:'100%', height: 'calc(100% - 200px)', overflow: 'hidden',}}>
+            <Box sx={{display: 'flex', width:'50%', height: '100%', overflow: 'auto',}}>
+              <Editor placeholder={"Begin een verhaal..."} theme="snow" value={valueLeft} onChange={setValueLeft} sx={{width: '100%', height: '100%',}}/>
             </Box>
-            <Box sx={{display: 'flex', flexDirection: 'row', width:'100%', height: '70%', overflow: 'hidden',}}>
-              <Box sx={{display: 'flex', width:'50%', height: '100%', overflow: 'auto',}}>
-                <EditorWithTabs placeholder={"Begin een verhaal..."} theme="snow" value={valueRight} onChange={setValueRight} sx={{width: '100%', height: '100%',}}/>
-              </Box>
-              <Box sx={{display: 'flex', width:'50%', height: '100%', overflow: 'auto',}}>
-                <Editor placeholder={"Begin een verhaal..."} theme="snow" value={valueLeft} onChange={setValueLeft} sx={{width: '100%', height: '100%',}}/>
+            <Box sx={{display: 'flex', width:'50%', height: '100%', overflow: 'auto',}}>
+              <EditorWithTabs placeholder={"Begin een verhaal..."} theme="snow" value={valueRight} onChange={setValueRight} sx={{width: '100%', height: '100%',}}/>
             </Box>
           </Box>
         </Box>

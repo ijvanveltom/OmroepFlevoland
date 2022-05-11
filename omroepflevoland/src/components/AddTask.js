@@ -1,10 +1,10 @@
 import Modal from "./Modal"
 import React, {useState} from 'react'
-import './addTask.css'
+import '../styles/addTask.css'
 import {db} from './firebase'
 import {collection, addDoc, Timestamp} from 'firebase/firestore'
 
-import './App.css';
+import '../styles/App.css';
 
 //import Mui components
 //import Button from '@mui/material/Button';
@@ -19,8 +19,8 @@ import InputLabel from "@mui/material/InputLabel";
 //import icons
 
 //import (custom) ReactQuill components
-import Editor from './components/Editor.js';
-import EditorWithTabs from './components/EditorWithTabs.js';
+import Editor from './Editor.js';
+import EditorWithTabs from './EditorWithTabs.js';
 import 'react-quill/dist/quill.snow.css';
 
 function AddTask({onClick, open}) {
