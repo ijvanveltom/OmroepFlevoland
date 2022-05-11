@@ -4,6 +4,9 @@ import './addTask.css'
 import {db} from './firebase'
 import {collection, addDoc, Timestamp} from 'firebase/firestore'
 
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
 import './App.css';
 
 //import Mui components
@@ -22,6 +25,8 @@ import InputLabel from "@mui/material/InputLabel";
 import Editor from './components/Editor.js';
 import EditorWithTabs from './components/EditorWithTabs.js';
 import 'react-quill/dist/quill.snow.css';
+
+import Parser from 'html-react-parser';
 
 function AddTask({onClick, open}) {
 
@@ -60,11 +65,15 @@ function AddTask({onClick, open}) {
   const [locatie, setLocatie] = useState('')
   const [contact, setContact] = useState('')
   const [text, setText] = useState('')
-
+  
+  
+  
   /* function to add new task to firestore */
   const handleSubmit = async (e) => {
+
     e.preventDefault()
     try {
+      
       await addDoc(collection(db, 'tasks'), {
         title: title,
         locatie: locatie, 
@@ -74,10 +83,19 @@ function AddTask({onClick, open}) {
         created: Timestamp.now()
       })
       onClick()
+      
     } catch (err) {
       alert(err)
-    }
+    };
+
+    
+    
   }
+
+
+
+
+ 
 
   return (
     <Modal modalLable='Voeg Story toe' onClick={onClick} open={open}>
@@ -158,13 +176,19 @@ function AddTask({onClick, open}) {
           </Box>
           <Box sx={{display: 'flex', flexDirection: 'row', width:'100%', height: 'calc(100% - 200px)', overflow: 'hidden',}}>
             <Box sx={{display: 'flex', width:'50%', height: '100%', overflow: 'auto',}}>
-              <Editor 
-              onChange={(e) => setText(e.target.value)}
-              placeholder={"Begin een verhaal..."} 
-              theme="snow" 
-              value={text} 
-              //onChange={text} 
-              sx={{width: '100%', height: '100%',}}></Editor>
+             
+<div dangerouslySetInnerHTML={{__html: this.state.content}}>
+<ReactQuill 
+theme="snow" 
+value={text} 
+
+onChange={setText}
+modules= {{
+  clipboard: {
+      matchVisual: false
+  }}}
+/></div> 
+
             </Box>
             <Box sx={{display: 'flex', width:'50%', height: '100%', overflow: 'auto',}}>
               <EditorWithTabs placeholder={"Begin een verhaal..."} theme="snow" value={valueRight} onChange={setValueRight} sx={{width: '100%', height: '100%',}}/>
