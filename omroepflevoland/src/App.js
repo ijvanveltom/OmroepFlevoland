@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './App.css';
 
 //import Mui components
-//import Button from '@mui/material/Button';
+import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import TextField from '@mui/material/TextField';
@@ -10,6 +10,12 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
+import Dialog from "@mui/material/Dialog";
+import AppBar from '@mui/material/AppBar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import CloseIcon from '@mui/icons-material/Close';
+import Slide from '@mui/material/Slide';
 
 //import custom Mui components
 import SideBarDrawer from './components/SideBarDrawer.js';
@@ -20,6 +26,11 @@ import SideBarDrawer from './components/SideBarDrawer.js';
 import Editor from './components/Editor.js';
 import EditorWithTabs from './components/EditorWithTabs.js';
 import 'react-quill/dist/quill.snow.css';
+
+//Open full editor screen
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 function App() {
   //Metadata values
@@ -52,18 +63,30 @@ function App() {
   const [valueLeft, setValueLeft] = useState('');
   const [valueRight, setValueRight] = useState('');
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   //Main page
   return (
     <div className="App">
       <Toolbar position="absolute" sx={{height: '7vh', overflow: 'hidden', backgroundColor: 'primary.main', color: 'white',}}>
-        <h1>Dashboard </h1>
+        <h1>Dashboard</h1>
       </Toolbar>
       <Box sx={{width:'100%', height: '93vh', overflow: 'hidden', display: 'flex',}}>
         <Box sx={{width:'4%', height: '100%', overflow: 'auto', borderTop: '1px solid #c4c4c4', borderRight: '1px solid #c4c4c4',}}>
           <SideBarDrawer/>
         </Box>
         <Box sx={{width:'20%', height: '100%', overflow: 'auto', borderTop: '1px solid #c4c4c4',}}>
-          Hello World
+          <Button variant="outlined" onClick={handleClickOpen}>
+            Open full-screen dialog
+          </Button>
         </Box>
         <Box sx={{width:'76%', height: '100%', overflow: 'hidden', borderTop: '1px solid #c4c4c4',}}>
           <Box sx={{width:'100%', height: '200px', overflow: 'auto', textAlign: 'left', paddingLeft: '10px', paddingTop: '10px', borderLeft: '1px solid #c4c4c4',}}>
@@ -121,6 +144,22 @@ function App() {
           </Box>
         </Box>
       </Box>
+      <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+        <AppBar sx={{ position: 'relative' }}>
+          <Toolbar>
+            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+              <CloseIcon/>
+            </IconButton>
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+              Sound
+            </Typography>
+            <Button autoFocus color="inherit" onClick={handleClose}>
+              save
+            </Button>
+          </Toolbar>
+        </AppBar>
+        <Editor placeholder={"Begin een verhaal..."} theme="snow" value={valueLeft} onChange={setValueLeft} sx={{width: '100%', height: '100%',}}/>
+      </Dialog>
     </div>
   );
 }

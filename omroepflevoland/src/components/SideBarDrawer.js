@@ -35,7 +35,7 @@ export default function SideBarDrawer() {
             <Button variant="text" size="large" aria-label="planner" sx={{width:'100%', height: '76px', color: 'primary.main',}}><CalendarMonth/></Button>
             <Button variant="text" size="large" aria-label="media" sx={{width:'100%', height: '76px', color: 'primary.main',}}><PermMedia/></Button>
 
-            <Drawer variant="persistent" anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} PaperProps={{sx:{height: 'calc(100% - 67px)', top: '67px',}}}>
+            <Drawer variant="persistent" anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
                 <Box m={1} display="flex" justifyContent="flex-end" alignItems="flex-end" sx={{paddingRight: '10px'}}>
                     <Button variant="outlined" sx={{marginRight: '10px'}} startIcon={<FilterList/>}>Sorteer Feed</Button>
                     <Button variant="outlined" onClick={toggleDrawer(anchor, false)} onKeyDown={toggleDrawer(anchor, false)} startIcon={<Close/>}>Sluit Menu</Button>

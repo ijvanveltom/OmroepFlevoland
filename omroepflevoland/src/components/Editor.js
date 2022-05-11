@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
+import OpenInFull from '@mui/icons-material/OpenInFull';
 
-const CustomButton = () => <span>F</span>;
+const CustomButton = () => <span><OpenInFull/></span>;
 
 function fullScreen() {
   const cursorPosition = this.quill.getSelection().index;
