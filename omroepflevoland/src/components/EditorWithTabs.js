@@ -31,6 +31,7 @@ class EditorWithTabs extends React.Component {
 
   handleChange(html) {
     this.setState({ editorHtml: html });
+    this.props.onChange(this.state.editorHtml);
   }
 
   render() {
@@ -38,11 +39,13 @@ class EditorWithTabs extends React.Component {
       <div className="text-editor">
         <CustomToolbarTabs />
         <ReactQuill
+          value={this.state.editorHtml}
           onChange={this.handleChange}
           placeholder={this.props.placeholder}
           modules={EditorWithTabs.modules}
           formats={EditorWithTabs.formats}
-          theme={"snow"} // pass false to use minimal theme
+          theme={"snow"}
+          defaultValue=''
         />
       </div>
     );

@@ -9,7 +9,6 @@ import '../styles/App.css';
 //import Mui components
 //import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import TextField from '@mui/material/TextField';
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -18,7 +17,6 @@ import InputLabel from "@mui/material/InputLabel";
 
 //import icons
 
-//import (custom) ReactQuill components
 import Editor from './Editor.js';
 import EditorWithTabs from './EditorWithTabs.js';
 import 'react-quill/dist/quill.snow.css';
@@ -52,7 +50,6 @@ function AddTask({onClick, open}) {
    var userName = "Julie Olree";
  
    //Editor values
-   const [valueLeft, setValueLeft] = useState('');
    const [valueRight, setValueRight] = useState('');
  
 
@@ -158,13 +155,7 @@ function AddTask({onClick, open}) {
           </Box>
           <Box sx={{display: 'flex', flexDirection: 'row', width:'100%', height: 'calc(100% - 200px)', overflow: 'hidden',}}>
             <Box sx={{display: 'flex', width:'50%', height: '100%', overflow: 'auto',}}>
-              <Editor 
-              onChange={(e) => setText(e.target.value)}
-              placeholder={"Begin een verhaal..."} 
-              theme="snow" 
-              value={text} 
-              //onChange={text} 
-              sx={{width: '100%', height: '100%',}}></Editor>
+              <Editor placeholder={"Begin een verhaal..."} theme="snow" value={text} onChange={(e) => setText(e)}  sx={{width: '100%', height: '100%',}}/>
             </Box>
             <Box sx={{display: 'flex', width:'50%', height: '100%', overflow: 'auto',}}>
               <EditorWithTabs placeholder={"Begin een verhaal..."} theme="snow" value={valueRight} onChange={setValueRight} sx={{width: '100%', height: '100%',}}/>

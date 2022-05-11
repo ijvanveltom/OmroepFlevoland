@@ -29,8 +29,9 @@ class Editor extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(html) {
-    this.setState({ editorHtml: html });
+  handleChange(value) {
+    this.setState({ editorHtml: value });
+    this.props.onChange(this.state.editorHtml);
   }
 
   render() {
@@ -38,11 +39,13 @@ class Editor extends React.Component {
       <div className="text-editor leftEditorFix">
         <CustomToolbar />
         <ReactQuill
+          value={this.state.editorHtml}
           onChange={this.handleChange}
           placeholder={this.props.placeholder}
           modules={Editor.modules}
           formats={Editor.formats}
-          theme={"snow"} // pass false to use minimal theme
+          theme={"snow"}
+          defaultValue=''
         />
       </div>
     );
