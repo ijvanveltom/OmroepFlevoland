@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import './styles/App.css';
 
 //import Mui components
@@ -10,29 +10,24 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
-import Dialog from "@mui/material/Dialog";
-import AppBar from '@mui/material/AppBar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import CloseIcon from '@mui/icons-material/Close';
-import Slide from '@mui/material/Slide';
-
-//import custom Mui components
+import Divider from '@mui/material/Divider';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 import SideBarDrawer from './components/SideBarDrawer.js';
 
 //import icons
+import Reorder from '@mui/icons-material/Reorder';
+import Add from '@mui/icons-material/Add';
 
 //import ReactQuill components
 import Editor from './components/Editor';
 import EditorWithTabs from './components/EditorWithTabs';
 import 'react-quill/dist/quill.snow.css';
 
-//Open full editor screen
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
-
-function App(onClick, open) {
+function App() {
 
   //Metadata values
   const [status, setStatus] = React.useState('10');
@@ -65,16 +60,6 @@ function App(onClick, open) {
   const [valueLeft, setValueLeft] = useState('');
   const [valueRight, setValueRight] = useState('');
 
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   //Main page
   return (
     <div className="App">
@@ -85,10 +70,27 @@ function App(onClick, open) {
         <Box sx={{width:'4%', height: '100%', overflow: 'auto', borderTop: '1px solid #c4c4c4', borderRight: '1px solid #c4c4c4',}}>
           <SideBarDrawer/>
         </Box>
-        <Box sx={{width:'20%', height: '100%', overflow: 'auto', borderTop: '1px solid #c4c4c4',}}>
-          <Button variant="outlined" onClick={handleClickOpen}>
-            Open full-screen dialog
-          </Button>
+        <Box sx={{width:'20%', height: '100%', overflow: 'auto', borderTop: '1px solid #c4c4c4', paddingTop:'10px',}}>
+          <Button variant="outlined" startIcon={<Add/>} sx={{marginRight:'10px'}}>Nieuwe Story</Button>
+          <Divider sx={{marginTop:'10px',}}/>
+          <List>
+            <ListItem disablePadding>
+                <ListItemButton>
+                    <ListItemIcon>
+                      <Reorder sx={{minWidth:'40px',}}/>
+                    </ListItemIcon>
+                    <ListItemText primary="Man valt van boot Heusden" secondary="Om 11:30 is er een man van een boot gevallen in de omgeving van Heusden..."/>
+                </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+                <ListItemButton>
+                    <ListItemIcon>
+                      <Reorder sx={{minWidth:'40px',}}/>
+                    </ListItemIcon>
+                    <ListItemText primary="Maxima op staatsbezoek Malta" secondary="Deze ochtend bezoekt Konigin Maxima het staatshoofd van Malta..."/>
+                </ListItemButton>
+            </ListItem>
+        </List>
         </Box>
         <Box sx={{width:'76%', height: '100%', overflow: 'hidden', borderTop: '1px solid #c4c4c4',}}>
           <Box sx={{width:'100%', height: '200px', overflow: 'auto', textAlign: 'left', paddingLeft: '10px', paddingTop: '10px', borderLeft: '1px solid #c4c4c4',}}>
@@ -146,22 +148,6 @@ function App(onClick, open) {
           </Box>
         </Box>
       </Box>
-      <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-        <AppBar sx={{ position: 'relative' }}>
-          <Toolbar>
-            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
-              <CloseIcon/>
-            </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Sound
-            </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
-              save
-            </Button>
-          </Toolbar>
-        </AppBar>
-        <Editor placeholder={"Begin een verhaal..."} theme="snow" value={valueLeft} onChange={setValueLeft} sx={{width: '100%', height: '100%',}}/>
-      </Dialog>
     </div>
   );
 }
