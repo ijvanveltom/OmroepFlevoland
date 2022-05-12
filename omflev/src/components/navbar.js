@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import "../styles/navbar.css";
 
 import logo from "../styles/logo.png"
@@ -31,19 +32,21 @@ const Navbar = () => {
 
     return (
         <div className='navbar'>
-            <img className='logo' alt="logo" src={logo} />
+            <a href='/home'>
+                <img className='logo' alt="logo" src={logo} />
+            </a>
 
             <div className='menu'>
                 {(ToggleMenu || screenWidth > 500) && (
                     <ul>
                         <li>
-                            <Link to="/stories">Stories</Link>
+                            <NavLink to="/stories">Stories</NavLink>
                         </li>
                         <li>
-                            <Link to="/draaiboeken">Draaiboeken</Link>
+                            <NavLink to="/draaiboeken">Draaiboeken</NavLink>
                         </li>
                         <li>
-                            <Link to="/media">Media</Link>
+                            <NavLink to="/media">Media</NavLink>
                         </li>
                     </ul>
                 )}
