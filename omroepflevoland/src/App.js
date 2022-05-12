@@ -17,6 +17,9 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import SideBarDrawer from './components/SideBarDrawer.js';
+import Chip from '@mui/material/Chip';
+import Autocomplete from '@mui/material/Autocomplete';
+import Stack from '@mui/material/Stack';
 
 //import icons
 import Reorder from '@mui/icons-material/Reorder';
@@ -60,6 +63,13 @@ function App() {
   const [valueLeft, setValueLeft] = useState('');
   const [valueRight, setValueRight] = useState('');
 
+  const gebruikers = [
+    { naam: 'Julie Olree' },
+    { naam: 'Amber Meijers' },
+    { naam: 'Carmen Engelen' },
+    { naam: 'Janneke van Veltom' },
+  ];
+
   //Main page
   return (
     <div className="App">
@@ -94,7 +104,7 @@ function App() {
         </Box>
         <Box sx={{width:'76%', height: '100%', overflow: 'hidden', borderTop: '1px solid #c4c4c4',}}>
           <Box sx={{width:'100%', height: '200px', overflow: 'auto', textAlign: 'left', paddingLeft: '10px', paddingTop: '10px', borderLeft: '1px solid #c4c4c4',}}>
-            <TextField InputLabelProps={{required: true}} id="outlined-basic" label="Titel" variant="outlined" sx={{width:'500px', marginRight: '10px', marginBottom: '10px',}}/>
+            <TextField InputLabelProps={{required: true}} id="outlined-basic" label="Titel" variant="outlined" sx={{width:'550px', marginRight: '10px', marginBottom: '10px',}}/>
             <TextField type="date" InputLabelProps={{shrink: true, required: true}} defaultValue={materialDateInput } id="outlined-basic" label="Datum" variant="outlined" sx={{width:'200px', marginRight: '10px', marginBottom: '10px',}}/>
             <TextField type="time" InputLabelProps={{shrink: true}} defaultValue="03:00" id="outlined-basic" label="Tijd" variant="outlined" sx={{width:'200px', marginRight: '10px', marginBottom: '10px',}}/>
             <FormControl>
@@ -115,7 +125,25 @@ function App() {
               </Select>
               </FormControl>
               <br></br>
-              <TextField id="outlined-basic" defaultValue={userName} label="Auteur" variant="outlined" sx={{width:'350px', marginRight: '10px', marginBottom: '10px',}}/>
+              <Autocomplete
+                multiple
+                limitTags={2}
+                id="tags-outlined"
+                sx={{width:'400px', marginRight: '10px', marginBottom: '10px', display: 'inline-flex',}}
+                options={gebruikers}
+                getOptionLabel={(option) => option.naam}
+                defaultValue={[gebruikers[1]]}
+                filterSelectedOptions
+                disableCloseOnSelect={true}
+                ListboxProps={{ style: { maxHeight: "15rem" }, position: "bottom-start" }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Auteur"
+                    placeholder="Voeg auteur toe..."
+                  />
+                )}
+              />
               <TextField id="outlined-basic" label="Locatie" variant="outlined" sx={{width:'200px', marginRight: '10px', marginBottom: '10px',}}/>
               <TextField id="outlined-basic" label="Contact" variant="outlined" sx={{width:'560px', marginRight: '10px', marginBottom: '10px',}}/>
               <br></br>
@@ -136,7 +164,7 @@ function App() {
                 <MenuItem value={50}>Niet</MenuItem>
               </Select>
             </FormControl>
-            <TextField id="outlined-basic" label="Notitie" variant="outlined" sx={{width:'970px', marginRight: '10px', marginBottom: '10px',}}/>
+            <TextField id="outlined-basic" label="Notitie" variant="outlined" sx={{width:'1020px', marginRight: '10px', marginBottom: '10px',}}/>
           </Box>
           <Box sx={{display: 'flex', flexDirection: 'row', width:'100%', height: 'calc(100% - 200px)', overflow: 'hidden',}}>
             <Box sx={{display: 'flex', width:'50%', height: '100%', overflow: 'auto',}}>
