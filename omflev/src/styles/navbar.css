@@ -1,3 +1,7 @@
+:root {
+    --item-color: antiquewhite;
+}
+
 .navbar {
     height: 60px;
     width: 100%;
@@ -12,7 +16,7 @@
 }
 
 a {
-    color: antiquewhite;
+    color: var(--item-color);
     text-decoration: none;
     padding: 0.5rem;
 }
@@ -21,14 +25,22 @@ a {
     height: 20px;
 }
 
-.menu {
+ul{
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    list-style-type: none;
+}
+
+a:active, a:focus {
+    color: var(--item-color);
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 .timer {
-    color: antiquewhite;
+    color: var(--item-color);
+    padding-left: 50%;
     display: flex;
     align-items: center;
 }
@@ -39,4 +51,36 @@ a {
     flex-wrap: wrap;
     position: fixed;
     right: 2%;
+}
+
+.btn {
+    display: none;
+    position: absolute;
+    left: 10px;
+    top: 7px;
+    padding: 5px;
+    color: #000;
+    font-size: 18px;
+}
+
+/* responsive navbar */
+@media screen and (max-width: 500px){
+    .menu {
+        flex-direction: column;
+        height: auto;
+    }
+    li:nth-child(1){
+        border-top: 1px solid rgba(255, 255, 255, 0.555);
+        margin-top: 50px;
+    }
+    li {
+        width: 100%;
+        border-top: 1px solid rgba(255, 255, 255, 0.555);
+        text-align: center;
+        margin-right: 0px;
+        padding: 20px 0;
+    }
+    .btn {
+        display: block;
+    }
 }
