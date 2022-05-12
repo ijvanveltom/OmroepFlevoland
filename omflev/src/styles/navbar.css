@@ -8,7 +8,7 @@
     background-color: maroon;
     color: black;
     box-shadow: 0 2px 2px 2px rgba(9, 9, 9, 0.23);
-    list-style-type:none;
+    list-style-type: none;
 }
 
 a {
@@ -21,7 +21,22 @@ a {
     height: 20px;
 }
 
+.menu {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 .timer {
     color: antiquewhite;
-    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.settings {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    position: fixed;
+    right: 2%;
 }

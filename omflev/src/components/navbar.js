@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import "../styles/navbar.css"
+import Typography from '@mui/material/Typography';
+
 import logo from "../styles/logo.png"
 import Clock from 'react-live-clock';
 
@@ -14,11 +16,7 @@ const navbar = () => {
     return (
         <div className='navbar'>
             <img className='logo' alt="logo" src={logo} />
-            <div className='menu' style={{
-                display: 'flex',
-                alignItems: 'center',
-                flexWrap: 'wrap'
-            }}>
+            <div className='menu'>
                 <li>
                     <Link to="/stories">Stories</Link>
                 </li>
@@ -29,19 +27,11 @@ const navbar = () => {
                     <Link to="/media">Media</Link>
                 </li>
             </div>
-            <div className='timer' style={{
-                display: 'flex',
-                alignItems: 'center',
-                flexWrap: 'wrap'
-            }}>
+            <div className='timer'>
                 <AccessTimeIcon />
                 <Clock format={'HH:mm:ss'} ticking={true} timezone={'UTC/GMT'} />
             </div>
-            <div className='settings' style={{
-                display: 'flex',
-                alignItems: 'center',
-                flexWrap: 'wrap'
-            }}>
+            <div className='settings'>
                 <li>
                     <Link to="/#"><QuestionMarkIcon /></Link>
                 </li>
