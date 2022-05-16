@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import "../styles/navbar.css";
@@ -35,7 +35,7 @@ const Navbar = () => {
 
             <div className='timer'>
                 <AccessTimeIcon />
-                <Clock format={'HH:mm:ss'} ticking={true} timezone={'UTC/GMT'} />
+                <Clock format={'HH:mm:ss'} ticking={true} timezone={'Europe/Amsterdam'} />
             </div>
             <div className='settings'>
                 <li>
