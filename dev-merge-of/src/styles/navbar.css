@@ -1,0 +1,80 @@
+:root {
+    --item-color: antiquewhite;
+}
+
+.navbar {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    padding: 0.5rem 1rem;
+    background-color: maroon;
+    color: black;
+    box-shadow: 0 2px 2px 2px rgba(9, 9, 9, 0.23);
+    list-style-type: none;
+}
+
+a {
+    color: var(--item-color);
+    text-decoration: none;
+    padding: 0.5rem;
+}
+
+.logo {
+    height: 20px;
+}
+
+ul{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    list-style-type: none;
+}
+
+.menu a:active, a:focus {
+    color: var(--item-color);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.timer {
+    color: var(--item-color);
+    padding-left: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.home {
+    display: none;
+}
+
+.settings {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    position: fixed;
+    right: 2%;
+}
+
+/* responsive navbar */
+@media screen and (max-width: 500px){
+    .menu {
+        flex-direction: column;
+        height: auto;
+    }
+    li:nth-child(1){
+        border-top: 1px solid rgba(255, 255, 255, 0.555);
+        margin-top: 50px;
+    }
+    li {
+        width: 100%;
+        border-top: 1px solid rgba(255, 255, 255, 0.555);
+        text-align: center;
+        margin-right: 0px;
+        padding: 20px 0;
+    }
+    .btn {
+        display: block;
+    }
+}
