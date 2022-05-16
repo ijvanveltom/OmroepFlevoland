@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import "../styles/navbar.css";
 
-import logo from "../styles/logo.png"
+import logo from "../logo.svg"
 import Clock from 'react-live-clock';
 
 import AccessTimeIcon from '@mui/icons-material/AccessTime';

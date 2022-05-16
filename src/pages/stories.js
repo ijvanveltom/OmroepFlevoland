@@ -2,34 +2,14 @@
 import '../styles/App.css';
 import {db} from '../components/firebase'
 import {collection, addDoc, Timestamp, query, orderBy, onSnapshot} from 'firebase/firestore'
-import Modal from "../components/Modal"
 import React, {useState, useEffect} from 'react'
 import AddTask from '../components/AddTask'
 import Task from '../components/Task'
 
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import TextField from '@mui/material/TextField';
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import InputLabel from "@mui/material/InputLabel";
 import SideBarDrawer from '../components/SideBarDrawer';
 
-import ReactQuill from 'react-quill';
-import Editor from '../components/Editor.js';
-import EditorWithTabs from '../components/EditorWithTabs.js';
 import 'react-quill/dist/quill.snow.css';
-
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "../components/navbar.js"
-import Stories from "../pages/stories.js"
-import Draaiboeken from "../pages/draaiboeken.js"
-import Media from "../pages/media.js"
-import Home from "../pages/home.js"
-
-
 
 const StoryPage = () =>{
 //Metadata values
@@ -102,7 +82,6 @@ onSnapshot(taskColRef, (snapshot) => {
     <Box sx={{width:'20%', height: '100%', overflow: 'auto', borderTop: '1px solid #c4c4c4',}}>
       
     <div className='taskManager'>
-      <header>header links</header>
       <div className='taskManager__container'>
      
         <div className='taskManager__tasks'>
@@ -139,7 +118,6 @@ onSnapshot(taskColRef, (snapshot) => {
     </Box>
     
     <div className='taskManager'>
-      <header>Omroep Flevoland test carmen</header>
       <div className='taskManager__container'>
       <button onClick={() => setOpenAddModal(true)}> Voeg Story toe + </button>
         <div className='taskManager__tasks'>

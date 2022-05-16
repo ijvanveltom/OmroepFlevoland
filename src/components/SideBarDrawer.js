@@ -31,9 +31,9 @@ export default function SideBarDrawer() {
     <div>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
-            <Button onClick={toggleDrawer(anchor, true)} variant="text" size="large" aria-label="nieuws" sx={{width:'100%', height: '76px', color: 'primary.main',}}><Campaign/></Button>
-            <Button variant="text" size="large" aria-label="planner" sx={{width:'100%', height: '76px', color: 'primary.main',}}><CalendarMonth/></Button>
-            <Button variant="text" size="large" aria-label="media" sx={{width:'100%', height: '76px', color: 'primary.main',}}><PermMedia/></Button>
+            <Button onClick={toggleDrawer(anchor, true)} variant="text" size="large" aria-label="nieuws" sx={{width:'100%', height: '76px', color: '#bf2133',}}><Campaign/></Button>
+            <Button variant="text" size="large" aria-label="planner" sx={{width:'100%', height: '76px', color: '#bf2133',}}><CalendarMonth/></Button>
+            <Button variant="text" size="large" aria-label="media" sx={{width:'100%', height: '76px', color: '#bf2133',}}><PermMedia/></Button>
 
             <Drawer variant="persistent" anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} PaperProps={{sx:{height: 'calc(100% - 67px)', top: '67px',}}}>
                 <Box m={1} display="flex" justifyContent="flex-end" alignItems="flex-end" sx={{paddingRight: '10px'}}>
