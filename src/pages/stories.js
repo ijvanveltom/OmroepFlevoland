@@ -1,0 +1,164 @@
+//import React, { useState } from "react";
+import '../styles/App.css';
+import {db} from '../components/firebase'
+import {collection, addDoc, Timestamp, query, orderBy, onSnapshot} from 'firebase/firestore'
+import Modal from "../components/Modal"
+import React, {useState, useEffect} from 'react'
+import AddTask from '../components/AddTask'
+import Task from '../components/Task'
+
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import TextField from '@mui/material/TextField';
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import SideBarDrawer from '../components/SideBarDrawer';
+
+import ReactQuill from 'react-quill';
+import Editor from '../components/Editor.js';
+import EditorWithTabs from '../components/EditorWithTabs.js';
+import 'react-quill/dist/quill.snow.css';
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "../components/navbar.js"
+import Stories from "../pages/stories.js"
+import Draaiboeken from "../pages/draaiboeken.js"
+import Media from "../pages/media.js"
+import Home from "../pages/home.js"
+
+
+
+const StoryPage = () =>{
+//Metadata values
+const [status, setStatus] = React.useState('10');
+const handleStatusChange = (event) => {
+  setStatus(event.target.value);
+};
+
+const [Office, setOffice] = React.useState("10");
+const handleOfficeChange = (event) => {
+  setOffice(event.target.value);
+};
+
+const dateNow = new Date(); // Creating a new date object with the current date and time
+const year = dateNow.getFullYear(); // Getting current year from the created Date object
+const monthWithOffset = dateNow.getUTCMonth() + 1; // January is 0 by default in JS. Offsetting +1 to fix date for calendar.
+const month = // Setting current Month number from current Date object
+  monthWithOffset.toString().length < 2 // Checking if month is < 10 and pre-prending 0 to adjust for date input.
+    ? `0${monthWithOffset}`
+    : monthWithOffset;
+const date =
+  dateNow.getUTCDate().toString().length < 2 // Checking if date is < 10 and pre-prending 0 if not to adjust for date input.
+    ? `0${dateNow.getUTCDate()}`
+    : dateNow.getUTCDate();
+
+const materialDateInput = `${year}-${month}-${date}`; // combining to format for defaultValue or value attribute of material <TextField>
+
+var userName = "Jarlaxle Baenre";
+
+//Editor values
+const [valueLeft, setValueLeft] = useState('');
+const [valueRight, setValueRight] = useState('');
+
+  //data values
+const [title, setTitle] = useState('')
+
+const handleSubmit = async (e) => {
+e.preventDefault()
+try {
+  await addDoc(collection(db, 'tasks'), {
+    title: title,
+  })
+ // onClose()
+} catch (err) {
+  alert(err)
+}
+}
+
+//taskmanager.js
+const [openAddModal, setOpenAddModal] = useState(false)
+const [tasks, setTasks] = useState([])
+
+/* function to get all tasks from firestore in realtime */ 
+useEffect(() => {
+const taskColRef = query(collection(db, 'tasks'), orderBy('created', 'desc'))
+onSnapshot(taskColRef, (snapshot) => {
+  setTasks(snapshot.docs.map(doc => ({
+    id: doc.id,
+    data: doc.data()
+  })))
+})
+},[])
+
+  return (
+    
+    <Box sx={{width:'100%', height: '93vh', overflow: 'hidden', display: 'flex',}}>
+    <Box sx={{width:'4%', height: '100%', overflow: 'auto', borderTop: '1px solid #c4c4c4', borderRight: '1px solid #c4c4c4',}}>
+      <SideBarDrawer/>
+    </Box>
+    <Box sx={{width:'20%', height: '100%', overflow: 'auto', borderTop: '1px solid #c4c4c4',}}>
+      
+    <div className='taskManager'>
+      <header>header links</header>
+      <div className='taskManager__container'>
+     
+        <div className='taskManager__tasks'>
+          {tasks.map((task) => (
+            <Task
+             /* id={task.id}
+              key={task.id}
+              completed={task.data.completed}
+              title={task.data.title} 
+              locatie={task.data.locatie}
+              contact={task.data.contact}
+              text={task.data.text}*/
+              id={task.id}
+              key={task.id}
+              title= {task.data.title}
+              locatie= {task.data.locatie} 
+              contact= {task.data.contact} 
+              textLeft= {task.data.textLeft}
+              textRight= {task.data.textRight}
+              completed= {task.data.completed}
+              datetext = {task.data.datetext}
+              office = {task.data.Office}
+              status = {task.data.status}
+              notitie ={task.data.notitie}
+              auteur = {task.data.auteur}
+              time = {task.data.time}
+            />
+          ))}
+        </div>
+      </div>
+       
+    </div>
+
+    </Box>
+    
+    <div className='taskManager'>
+      <header>Omroep Flevoland test carmen</header>
+      <div className='taskManager__container'>
+      <button onClick={() => setOpenAddModal(true)}> Voeg Story toe + </button>
+        <div className='taskManager__tasks'>
+         
+        </div>
+      </div>
+      <Box sx={{width:'100%', height: '100%', overflow: 'auto', borderTop: '1px solid #c4c4c4',}}>
+      {openAddModal &&
+        <AddTask PaperProps = {{width:'76%', height: '100%', overflow: 'auto', borderTop: '1px solid #c4c4c4',}}
+        onClick={() => setOpenAddModal(false)} open={openAddModal}/>
+      }
+        </Box> 
+    </div>
+
+    
+      
+     
+    </Box> 
+  
+  );
+}
+export default StoryPage;
