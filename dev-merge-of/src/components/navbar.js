@@ -14,11 +14,11 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Navbar = () => {
 
-    const [ToggleMenu, setToggleMenu] = useState(false);
+    const [ToggleMenu, setToggleMenu] = React.useState(false);
     const ToggleNav = () => {
         setToggleMenu(!ToggleMenu)
     }
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+    const [screenWidth, setScreenWidth] = React.useState(window.innerWidth);
 
     useEffect(() => {
 
