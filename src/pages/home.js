@@ -10,13 +10,13 @@ const Home = () => {
                 <h3 className='titel'>Home</h3>
                 <div className='bttn'>
                     <Link to='/stories'>
-                        <button>Leuke Button naar stories</button>
+                        <button>Stories</button>
                     </Link>
                     <Link to='/draaiboeken'>
-                        <button>Leuke Button naar draaiboeken</button>
+                        <button>Draaiboeken</button>
                     </Link>
                     <Link to='/media'>
-                        <button>Leuke Button naar media</button>
+                        <button>Media</button>
                     </Link>
                 </div>
             </Grid>

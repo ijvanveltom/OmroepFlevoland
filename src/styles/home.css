@@ -11,3 +11,8 @@ button {
     margin: 0 auto;
     display:block;
 }
+
+button:hover {
+    background-color: #bf2133;
+    color: antiquewhite;
+}
