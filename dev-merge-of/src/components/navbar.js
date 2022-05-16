@@ -13,23 +13,6 @@ import CreateIcon from '@mui/icons-material/Create';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Navbar = () => {
-
-    const [ToggleMenu, setToggleMenu] = React.useState(false);
-    const ToggleNav = () => {
-        setToggleMenu(!ToggleMenu)
-    }
-    const [screenWidth, setScreenWidth] = React.useState(window.innerWidth);
-
-    useEffect(() => {
-
-        const changeWidth = () => {
-            setScreenWidth(window.innerWidth);
-        }
-
-        window.addEventListener('resize', changeWidth)
-
-    }, [])
-
     return (
         <div className='navbar'>
             <a href='/home'>
@@ -37,21 +20,17 @@ const Navbar = () => {
             </a>
 
             <div className='menu'>
-                {(ToggleMenu || screenWidth > 500) && (
-                    <ul>
-                        <li>
-                            <NavLink to="/stories">Stories</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/draaiboeken">Draaiboeken</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/media">Media</NavLink>
-                        </li>
-                    </ul>
-                )}
-
-                <button onClick={ToggleNav} className="btn">BTN</button>
+                <ul>
+                    <li>
+                        <NavLink to="/stories">Stories</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/draaiboeken">Draaiboeken</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/media">Media</NavLink>
+                    </li>
+                </ul>
             </div>
 
             <div className='timer'>
