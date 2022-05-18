@@ -1,3 +1,7 @@
+.modalContainer{
+  height:100%; 
+}
+
 /*.modalContainer {
   position: fixed;
   width: 100vw; 

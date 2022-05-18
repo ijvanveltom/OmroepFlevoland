@@ -2,7 +2,7 @@
     text-align: center;
 }
 
-button {
+.addStory {
     min-width: 80%;
     height: 30px;
     align-items: center;
@@ -12,7 +12,20 @@ button {
     display:block;
 }
 
-button:hover {
+.addStory:hover {
+    background-color: #bf2133;
+    color: antiquewhite;
+}
+
+.klaar {
+    min-width: 10.5%;
+    height: 55px;
+    align-items: center;
+    border: 15px;
+    border-radius: 5px;
+    /*margin: 0 auto;*/
+}
+.klaar:hover {
     background-color: #bf2133;
     color: antiquewhite;
 }

@@ -75,7 +75,7 @@ onSnapshot(taskColRef, (snapshot) => {
 
   return (
     
-    <Box sx={{width:'100%', height: '93vh', overflow: 'hidden', display: 'flex',}}>
+    <Box sx={{width:'100%', height: '100%', overflow: 'hidden', display: 'flex',}}>
     <Box sx={{width:'4%', height: '100%', overflow: 'auto', borderTop: '1px solid #c4c4c4', borderRight: '1px solid #c4c4c4',}}>
       <SideBarDrawer/>
     </Box>
@@ -83,7 +83,8 @@ onSnapshot(taskColRef, (snapshot) => {
       
     <div className='taskManager'>
       <div className='taskManager__container'>
-     
+      <button className='addStory' onClick={() => setOpenAddModal(true)}> Nieuwe Story + </button>
+
         <div className='taskManager__tasks'>
           {tasks.map((task) => (
             <Task
@@ -119,7 +120,7 @@ onSnapshot(taskColRef, (snapshot) => {
     
     <div className='taskManager'>
       <div className='taskManager__container'>
-      <button onClick={() => setOpenAddModal(true)}> Voeg Story toe + </button>
+     
         <div className='taskManager__tasks'>
          
         </div>

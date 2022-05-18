@@ -73,7 +73,7 @@
 }
 
 .task__buttons > button {
-  background-color: hsl(210, 70%, 60%);
+  background-color: #bf2133; 
   padding: 5px 10px;
   font-size: 16px;
   border: none;
@@ -106,13 +106,17 @@
 }
 
 .task__deleteNedit .task__deleteButton {
-  color: hsl(0, 80%, 80%);
+  color: #bf2133; 
 }
 
 .task__deleteButton:hover {
-  color: hsl(0, 70%, 70%);
+  color: #bf2133; 
 }
 
 .task__deleteButton:active {
-  color: hsl(0, 80%, 80%);
+  color: #bf2133; 
+}
+
+.aList{
+  color: #bf2133; 
 }

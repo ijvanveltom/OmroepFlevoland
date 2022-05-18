@@ -4,11 +4,14 @@ import TaskItem from './TaskItem'
 import EditTask from './EditTask'
 import { doc, updateDoc, deleteDoc} from "firebase/firestore";
 import {db} from './firebase'
+import DehazeIcon from '@mui/icons-material/Dehaze';
+import { Link } from 'react-router-dom';
 
-function Task({id, title, locatie, contact, text, textLeft, completed}) {
+function Task({id, title, locatie, auteur, contact, text, textLeft, completed}) {
 
   const [checked, setChecked] = useState(completed)
   const [open, setOpen] = useState({edit:false, view:false})
+  const [openAddModal, setOpenAddModal] = useState(false)
 
   const handleClose = () => {
     setOpen({edit:false, view:false})
@@ -35,30 +38,18 @@ function Task({id, title, locatie, contact, text, textLeft, completed}) {
       alert(err)
     }
   }
-  console.log({id, title, locatie, contact, text, textLeft, completed})
+ 
   return (
-    
+     
     <div className={`task ${checked && 'task--borderColor'}`}>
+      
       <div>
-        <input 
-          id={`checkbox-${id}`} 
-          className='checkbox-custom'
-          name="checkbox" 
-          checked={checked}
-          onChange={handleChange}
-          type="checkbox" />
-        <label 
-          htmlFor={`checkbox-${id}`} 
-          className="checkbox-custom-label" 
-          onClick={() => setChecked(!checked)} ></label>
+                    <Link className='aList' to="/#"><DehazeIcon /></Link>
       </div>
       <div className='task__body'>
         <h2>{title}</h2>
-        <p>{locatie}</p>
-        <p>{contact}</p>
-        <p>{text}</p>
-        <p>{textLeft}</p>
-        <div className='task__buttons'>
+        <p>{auteur}</p>
+        {/*<div className='task__buttons'>
           <div className='task__deleteNedit'>
             <button 
               className='task__editButton' 
@@ -71,7 +62,7 @@ function Task({id, title, locatie, contact, text, textLeft, completed}) {
             onClick={() => setOpen({...open, view: true})}>
             Open
           </button>
-        </div>
+  </div> */}
       </div>
 
       {open.view &&

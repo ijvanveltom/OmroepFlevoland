@@ -5,7 +5,7 @@ const Draaiboeken = () =>{
     <div>
       <h3>Draaiboeken</h3>
       <div>
-        <h4>Insert leuke planning pagina</h4>
+        <h4>Hier komt een planning pagina</h4>
       </div>
     </div>
   );

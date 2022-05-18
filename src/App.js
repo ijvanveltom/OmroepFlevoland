@@ -4,14 +4,17 @@ import React from 'react'
 
 import 'react-quill/dist/quill.snow.css';
 
+//test
+console.log('test')
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/navbar.js"
 import Stories from "./pages/stories.js"
 import Draaiboeken from "./pages/draaiboeken.js"
 import Media from "./pages/media.js"
 import Home from "./pages/home.js"
-//aanpassing voor git
-console.log('change')
+//change
+console.log('change because github')
 function App() {
   return (
     <div className="App">
