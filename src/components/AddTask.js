@@ -55,22 +55,16 @@ function AddTask({ onClick, open }) {
   const materialDateInput = `${year}-${month}-${date}`; // combining to format for defaultValue or value attribute of material <TextField>
 
   var userName = "Julie Olree";
-
-  //Editor values
-  const [valueLeft, setValueLeft] = useState('');
-  const [valueRight, setValueRight] = useState('');
-
-
+  
   const [title, setTitle] = useState('')
   const [locatie, setLocatie] = useState('')
   const [contact, setContact] = useState('')
-  const [text, setText] = useState('')
   const [textLeft, setTextLeft] = useState('')
+  const [textRight, setTextRight] = useState('')
   const [datetext, setDate] = useState(materialDateInput)
   const [time, setTime] = useState('03:00')
   const [auteur, setAuteur] = useState(userName)
   const [notitie, setNotitie] = useState('')
-  const [textRight, setTextRight] = useState('')
 
 
   /* function to add new task to firestore */

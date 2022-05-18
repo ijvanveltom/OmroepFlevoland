@@ -33,12 +33,24 @@ const EditTask = (props) =>  {
   const [locatie, setLocatie] = useState(props.locatie)
   const [contact, setContact] = useState(props.contact)
   const [textLeft, setTextLeft] = useState(props.textLeft)
+  const [textRight, setTextRight] = useState(props.textRight)
   const [datetext, setDate] = useState(props.datetext)
   const [time, setTime] = useState(props.time)
   const [auteur, setAuteur] = useState(props.auteur)
   const [notitie, setNotitie] = useState(props.notitie)
-  const [textRight, setTextRight] = useState(props.text)
-  const [office, setOffice] = useState(props.office)
+  const [office, setOffice] = useState('10')
+
+  React.useEffect(() => { 
+    setTitle(props.title);
+    setLocatie(props.locatie);
+    setContact(props.contact);
+    setTextLeft(props.textLeft);
+    setTextRight(props.textRight);
+    setDate(props.datetext);
+    setTime(props.time);
+    setAuteur(props.auteur);
+    setNotitie(props.auteur);
+   });
 
   /* function to update firestore */
   const handleUpdate = async (e) => {
@@ -193,14 +205,14 @@ const EditTask = (props) =>  {
                   <Box sx={{ display: 'flex', width: '50%', height: '100%', overflow: 'auto', }}>
                     <Editor
                       placeholder={"Begin een verhaal..."}
-                      theme="snow" value={textLeft}
+                      theme="snow" value={props.textLeft}
                       onChange={(e) => setTextLeft(e)}
                       sx={{ width: '100%', height: '100%' }} />
                   </Box>
                   <Box sx={{ display: 'flex', width: '50%', height: '100%', overflow: 'auto', }}>
                     <EditorWithTabs
                       placeholder={"Begin een verhaal..."}
-                      theme="snow" value={textRight}
+                      theme="snow" value={props.textRight}
                       onChange={(e) => setTextRight(e)}
                       sx={{ width: '100%', height: '100%', }} />
                   </Box>

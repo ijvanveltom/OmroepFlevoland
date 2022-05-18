@@ -1,13 +1,9 @@
 import React from 'react';
+import Stories from "./stories.js"
 
 const Draaiboeken = () =>{
   return (
-    <div>
-      <h3>Draaiboeken</h3>
-      <div>
-        <h4>Hier komt een planning pagina</h4>
-      </div>
-    </div>
+    <Stories/>
   );
 }
 export default Draaiboeken;

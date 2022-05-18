@@ -25,8 +25,15 @@ const CustomToolbarTabs = () => (
 class EditorWithTabs extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { editorHtml: "" };
+    this.state = { editorHtml: props.value };
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidUpdate = (props) => {
+    console.log(props.value);
+    if (props.value !== this.state.editorHtml) {
+      this.handleChange(props.value);
+    }
   }
 
   handleChange(html) {

@@ -10,8 +10,7 @@ import Stories from "./pages/stories.js"
 import Draaiboeken from "./pages/draaiboeken.js"
 import Media from "./pages/media.js"
 import Home from "./pages/home.js"
-//change
-console.log('change because github')
+
 function App() {
   return (
     <div className="App">

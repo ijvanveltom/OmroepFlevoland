@@ -76,6 +76,13 @@ onSnapshot(taskColRef, (snapshot) => {
 })
 },[])
 
+const clickFix = (task) =>{
+  setOpenEditModal(false);
+  setOpenAddModal(false);
+  setSelectForEdit(task)
+  setOpenEditModal(true);
+}
+
   return (
     <Box sx={{width:'100%', height: '100%', overflow: 'hidden', display: 'flex',}}>
     <Box sx={{width:'80px', height: '100%', overflow: 'auto', borderTop: '1px solid #c4c4c4', borderRight: '1px solid #c4c4c4',}}>
@@ -104,7 +111,7 @@ onSnapshot(taskColRef, (snapshot) => {
               notitie ={task.data.notitie}
               auteur = {task.data.auteur}
               time = {task.data.time}
-              onClick={() => {setOpenEditModal(true); setOpenAddModal(false); setSelectForEdit(task)}}
+              onClick={() => { clickFix(task) }}
             />
           ))}
         </div>

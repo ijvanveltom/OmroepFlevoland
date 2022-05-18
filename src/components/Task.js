@@ -42,7 +42,6 @@ const Task = (props) => {
       alert(err)
     }
   }
-  console.log(props.id, props.title, props.locatie, props.contact, props.text, props.textLeft, props.completed)
 
   const secondaryText = props.locatie + ": " + props.textLeft.replace(/<[^>]*>?/gm, '');;
 
@@ -54,10 +53,6 @@ const Task = (props) => {
         </ListItemIcon>
         <ListItemText primary={props.title} secondary={secondaryText} sx={{minWidth:'50%',}}/>
         <Button className='task__deleteButton' onClick={handleDelete} sx={{position:'absolute', bottom:'5px', right:'15px', color:'#bf2133'}}><DeleteForever/></Button>
-        {/*<ListItemText>
-          <Button className='task__editButton' onClick={() => setOpen({...open, edit : true})}>Aanpassen</Button>
-          <Button onClick={() => setOpen({...open, view: true})}>Open</Button>
-  </ListItemText>*/}
       </ListItemButton>
     </ListItem>
   )
