@@ -4,7 +4,7 @@
 
 .navbar {
     height: 60px;
-    /*width: 100%;*/
+    width: 100%;
     display: flex;
     align-items: center;
     position: sticky;
@@ -32,11 +32,11 @@ ul{
     list-style-type: none;
 }
 
-/*.menu a:active, a:focus {
+.menu a:hover, .menu a:focus, .activeMenu {
     color: var(--item-color);
     font-weight: bold;
     text-decoration: underline;
-}*/
+}
 
 .timer {
     color: var(--item-color);

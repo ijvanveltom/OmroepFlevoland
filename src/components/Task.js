@@ -2,16 +2,19 @@ import '../styles/task.css'
 import {useState} from 'react'
 import TaskItem from './TaskItem'
 import EditTask from './EditTask'
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import DragHandle from '@mui/icons-material/DragHandle';
+import DeleteForever from '@mui/icons-material/DeleteForever';
+import Button from '@mui/material/Button';
 import { doc, updateDoc, deleteDoc} from "firebase/firestore";
 import {db} from './firebase'
-import DehazeIcon from '@mui/icons-material/Dehaze';
-import { Link } from 'react-router-dom';
 
-function Task({id, title, locatie, auteur, contact, text, textLeft, completed}) {
-
-  const [checked, setChecked] = useState(completed)
+const Task = (props) => {
+  const [checked, setChecked] = useState(props.completed)
   const [open, setOpen] = useState({edit:false, view:false})
-  const [openAddModal, setOpenAddModal] = useState(false)
 
   const handleClose = () => {
     setOpen({edit:false, view:false})
@@ -19,7 +22,8 @@ function Task({id, title, locatie, auteur, contact, text, textLeft, completed}) 
 
   /* function to update firestore */
   const handleChange = async () => {
-    const taskDocRef = doc(db, 'tasks', id)
+    const taskDocRef = doc(db, 'tasks', props.id)
+    setChecked(this.event.target.checked);
     try{
       await updateDoc(taskDocRef, {
         completed: checked
@@ -31,63 +35,31 @@ function Task({id, title, locatie, auteur, contact, text, textLeft, completed}) 
 
   /* function to delete a document from firstore */ 
   const handleDelete = async () => {
-    const taskDocRef = doc(db, 'tasks', id)
+    const taskDocRef = doc(db, 'tasks', props.id)
     try{
       await deleteDoc(taskDocRef)
     } catch (err) {
       alert(err)
     }
   }
- 
+  console.log(props.id, props.title, props.locatie, props.contact, props.text, props.textLeft, props.completed)
+
+  const secondaryText = props.locatie + ": " + props.textLeft.replace(/<[^>]*>?/gm, '');;
+
   return (
-     
-    <div className={`task ${checked && 'task--borderColor'}`}>
-      
-      <div>
-                    <Link className='aList' to="/#"><DehazeIcon /></Link>
-      </div>
-      <div className='task__body'>
-        <h2>{title}</h2>
-        <p>{auteur}</p>
-        {/*<div className='task__buttons'>
-          <div className='task__deleteNedit'>
-            <button 
-              className='task__editButton' 
-              onClick={() => setOpen({...open, edit : true})}>
-              Aanpassen
-            </button>
-            <button className='task__deleteButton' onClick={handleDelete}>Verwijderen</button>
-          </div>
-          <button 
-            onClick={() => setOpen({...open, view: true})}>
-            Open
-          </button>
-  </div> */}
-      </div>
-
-      {open.view &&
-        <TaskItem 
-        onClick={handleClose} 
-          title={title} 
-          locatie={locatie}
-          contact={contact}
-          text={text} 
-          textLeft={textLeft}
-          open={open.view} />
-      }
-
-      {open.edit &&
-        <EditTask 
-        onClick={handleClose} 
-          toEditTitle={title} 
-          toEditLocatie={locatie} 
-          toEditContact={contact} 
-          toEditText={text} 
-          open={open.edit}
-          id={id} />
-      }
-
-    </div>
+    <ListItem disablePadding onClick={props.onClick}>
+      <ListItemButton>
+        <ListItemIcon>
+          <DragHandle sx={{color:'#bf2133'}}/>
+        </ListItemIcon>
+        <ListItemText primary={props.title} secondary={secondaryText} sx={{minWidth:'50%',}}/>
+        <Button className='task__deleteButton' onClick={handleDelete} sx={{position:'absolute', bottom:'5px', right:'15px', color:'#bf2133'}}><DeleteForever/></Button>
+        {/*<ListItemText>
+          <Button className='task__editButton' onClick={() => setOpen({...open, edit : true})}>Aanpassen</Button>
+          <Button onClick={() => setOpen({...open, view: true})}>Open</Button>
+  </ListItemText>*/}
+      </ListItemButton>
+    </ListItem>
   )
 }
 

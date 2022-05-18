@@ -28,10 +28,6 @@ import 'react-quill/dist/quill.snow.css';
 
 import Parser from 'html-react-parser';
 
-
-
-
-
 function AddTask({ onClick, open }) {
 
   //Metadata values
@@ -70,9 +66,9 @@ function AddTask({ onClick, open }) {
   const [contact, setContact] = useState('')
   const [text, setText] = useState('')
   const [textLeft, setTextLeft] = useState('')
-  const [datetext, setDate] = useState('')
-  const [time, setTime] = useState('')
-  const [auteur, setAuteur] = useState('')
+  const [datetext, setDate] = useState(materialDateInput)
+  const [time, setTime] = useState('03:00')
+  const [auteur, setAuteur] = useState(userName)
   const [notitie, setNotitie] = useState('')
   const [textRight, setTextRight] = useState('')
 
@@ -101,25 +97,17 @@ function AddTask({ onClick, open }) {
     } catch (err) {
       alert(err)
     };
-
-
-
   }
-
-
-
-
-
 
   return (
     <Modal  onClick={onClick} open={open}>
-      <Box sx={{ width: '100%', height: '100%', overflow: 'auto', borderTop: '1px solid #c4c4c4', }}>
+      <Box sx={{ width: '100%', height: '100%', overflow: 'hidden', borderTop: '1px solid #c4c4c4', }}>
 
         <form onSubmit={handleSubmit} className='addTask' name='addTask'>
           <div className="App">
-            <Box sx={{ width: '100%', height: '80%', overflow: 'hidden', display: 'flex', }}>
+            <Box sx={{ width: '100%', height: 'calc(100% - 88px)', overflow: 'hidden', display: 'flex', }}>
               <Box sx={{ width: '100%', height: '100%', overflow: 'hidden', borderTop: '1px solid #c4c4c4', }}>
-                <Box sx={{ width: '100%', height: '20%', overflow: 'auto', textAlign: 'left', paddingLeft: '10px', paddingTop: '10px', borderLeft: '1px solid #c4c4c4', }}>
+                <Box sx={{ width: '99%', height: '200px', overflow: 'auto', textAlign: 'left', paddingLeft: '10px', paddingTop: '10px', borderLeft: '1px solid #c4c4c4', }}>
 
                   <TextField InputLabelProps={{ required: true }}
                     id="outlined-basic"
@@ -136,7 +124,6 @@ function AddTask({ onClick, open }) {
                     onChange={(e) => setDate(e.target.value)}
                     value={datetext}
                     InputLabelProps={{ shrink: true, required: true }}
-                    defaultValue={materialDateInput}
                     id="outlined-basic" 
                     label="Datum"
                     variant="outlined" 
@@ -148,8 +135,6 @@ function AddTask({ onClick, open }) {
                   <TextField
                     type="time"
                     InputLabelProps={{ shrink: true }}
-                    //defaultValue="03:00" id="outlined-basic" 
-                    defaultValue={Timestamp.now()}
                     label="Tijd"
                     onChange={(e) => setTime(e.target.value)}
                     value={time}
@@ -183,7 +168,6 @@ function AddTask({ onClick, open }) {
                   </FormControl>
                   <br></br>
                   <TextField id="outlined-basic"
-                    defaultValue={userName}
                     onChange={(e) => setAuteur(e.target.value)}
                     value={auteur}
                     label="Auteur"
@@ -241,8 +225,6 @@ function AddTask({ onClick, open }) {
                   <button  className='klaar' type='submit'>Klaar</button>
                 </Box>
 
-                
-
                 <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%', height: 'calc(100% - 200px)', overflow: 'hidden', }}>
                   <Box sx={{ display: 'flex', width: '50%', height: '100%', overflow: 'auto', }}>
                     <Editor
@@ -250,7 +232,6 @@ function AddTask({ onClick, open }) {
                       theme="snow" value={textLeft}
                       onChange={(e) => setTextLeft(e)}
                       sx={{ width: '100%', height: '100%' }} />
-
                   </Box>
                   <Box sx={{ display: 'flex', width: '50%', height: '100%', overflow: 'auto', }}>
                     <EditorWithTabs
@@ -258,10 +239,7 @@ function AddTask({ onClick, open }) {
                       theme="snow" value={textRight}
                       onChange={(e) => setTextRight(e)}
                       sx={{ width: '100%', height: '100%', }} />
-
                   </Box>
-                  
-
                 </Box>
               </Box>
             </Box>

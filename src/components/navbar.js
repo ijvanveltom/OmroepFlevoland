@@ -1,62 +1,44 @@
 import React from 'react';
-//import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import "../styles/navbar.css";
- 
+
 import logo from "../logo.svg"
 import Clock from 'react-live-clock';
- 
+
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import GridViewIcon from '@mui/icons-material/GridView';
 import CreateIcon from '@mui/icons-material/Create';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
- 
-import {
-    Nav,
-    NavLink,
-    Bars,
-    NavMenu,
-    NavBtn,
-    NavBtnLink
-  } from './NavbarElements';
- 
+
 const Navbar = () => {
     return (
- 
- 
- 
- 
-       
         <div className='navbar'>
-            <a href='/home'>
+            <a href='/'>
                 <img className='logo' alt="logo" src={logo} />
             </a>
- 
-            <div className='menu'>
-            <NavMenu>
+
+            <nav className='menu'>
                 <ul>
                     <li>
-                        <NavLink activeStyle
-                       
-                        to="/stories">Stories</NavLink>
+                        <NavLink to="/stories" className={({ isActive }) => "nav-link" + (isActive ? " activeMenu" : "")}>Stories</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/draaiboeken" activeStyle>Draaiboeken</NavLink>
+                        <NavLink to="/draaiboeken" className={({ isActive }) => "nav-link" + (isActive ? " activeMenu" : "")}>Draaiboeken</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/media" activeStyle>Media</NavLink>
+                        <NavLink to="/media" className={({ isActive }) => "nav-link" + (isActive ? " activeMenu" : "")}>Media</NavLink>
                     </li>
                 </ul>
-            </NavMenu>
-            </div>
- 
+            </nav>
+
             <div className='timer'>
                 <AccessTimeIcon />
                 <Clock format={'HH:mm:ss'} ticking={true} timezone={'Europe/Amsterdam'} />
             </div>
- 
-           
+
+            
             <div className='settings'>
                 <li>
                     <Link to="/#"><QuestionMarkIcon /></Link>
@@ -74,6 +56,5 @@ const Navbar = () => {
         </div>
     );
 }
- 
-export default Navbar;
 
+export default Navbar;
