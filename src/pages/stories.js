@@ -79,8 +79,8 @@ onSnapshot(taskColRef, (snapshot) => {
 const clickFix = (task) =>{
   setOpenEditModal(false);
   setOpenAddModal(false);
-  setSelectForEdit(task)
   setOpenEditModal(true);
+  setSelectForEdit(task);
 }
 
   return (

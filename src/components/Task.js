@@ -43,6 +43,12 @@ const Task = (props) => {
     }
   }
 
+  const truncate = (str) => {
+    if (str.length <= 60) { return str; }
+    const subString = str.substr(0, 60-1); // the original check
+    return (true ? subString.substr(0, subString.lastIndexOf(" ")) : subString) + "...";
+  }
+
   const secondaryText = props.locatie + ": " + props.textLeft.replace(/<[^>]*>?/gm, '');;
 
   return (
@@ -51,7 +57,7 @@ const Task = (props) => {
         <ListItemIcon>
           <DragHandle sx={{color:'#bf2133'}}/>
         </ListItemIcon>
-        <ListItemText primary={props.title} secondary={secondaryText} sx={{minWidth:'50%',}}/>
+        <ListItemText primary={truncate(props.title)} secondary={truncate(secondaryText)} sx={{minWidth:'50%',}}/>
         <Button className='task__deleteButton' onClick={handleDelete} sx={{position:'absolute', bottom:'5px', right:'15px', color:'#bf2133'}}><DeleteForever/></Button>
       </ListItemButton>
     </ListItem>

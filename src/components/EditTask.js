@@ -10,16 +10,12 @@ import 'react-quill/dist/quill.snow.css';
 import '../styles/App.css';
 
 //import Mui components
-//import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-//import Toolbar from '@mui/material/Toolbar';
 import TextField from '@mui/material/TextField';
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
-
-//import icons
 
 //import (custom) ReactQuill components
 import Editor from './Editor.js';
@@ -40,7 +36,7 @@ const EditTask = (props) =>  {
   const [notitie, setNotitie] = useState(props.notitie)
   const [office, setOffice] = useState('10')
 
-  React.useEffect(() => { 
+  React.useEffect(() => {
     setTitle(props.title);
     setLocatie(props.locatie);
     setContact(props.contact);
@@ -50,11 +46,12 @@ const EditTask = (props) =>  {
     setTime(props.time);
     setAuteur(props.auteur);
     setNotitie(props.auteur);
-   });
+  }, [props]);
 
   /* function to update firestore */
   const handleUpdate = async (e) => {
     e.preventDefault()
+    console.log(textLeft);
     const taskDocRef = doc(db, 'tasks', props.id)
     try{
       await updateDoc(taskDocRef, {
@@ -63,8 +60,6 @@ const EditTask = (props) =>  {
         contact: contact,
         textLeft: textLeft,
         textRight: textRight,
-        completed: false,
-        created: Timestamp.now(),
         datetext: datetext,
         notitie: notitie,
         auteur: auteur,
@@ -74,7 +69,6 @@ const EditTask = (props) =>  {
     } catch (err) {
       alert(err)
     }
-    
   }
 
   return (
@@ -197,22 +191,25 @@ const EditTask = (props) =>  {
                     onChange={(e) => setNotitie(e.target.value)}
                     value={notitie}
                     variant="outlined"
-                    sx={{ width: '69%', marginRight: '10px', marginBottom: '10px', }} />
-                  <button  className='klaar' type='submit'>Klaar</button>
+                    sx={{ width: '58%', marginRight: '10px', marginBottom: '10px', }} />
+                  <button className='klaar' type='submit'>Klaar</button>
+                  <button className='klaar' type="button" style={{marginLeft:'10px'}}>Publish</button>
                 </Box>
 
                 <Box sx={{ display: 'flex', flexDirection: 'row', width: '100%', height: 'calc(100% - 200px)', overflow: 'hidden', }}>
                   <Box sx={{ display: 'flex', width: '50%', height: '100%', overflow: 'auto', }}>
                     <Editor
                       placeholder={"Begin een verhaal..."}
-                      theme="snow" value={props.textLeft}
+                      theme="snow"
+                      value={props.textLeft}
                       onChange={(e) => setTextLeft(e)}
                       sx={{ width: '100%', height: '100%' }} />
                   </Box>
                   <Box sx={{ display: 'flex', width: '50%', height: '100%', overflow: 'auto', }}>
                     <EditorWithTabs
                       placeholder={"Begin een verhaal..."}
-                      theme="snow" value={props.textRight}
+                      theme="snow"
+                      value={props.textRight}
                       onChange={(e) => setTextRight(e)}
                       sx={{ width: '100%', height: '100%', }} />
                   </Box>

@@ -1,13 +1,9 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
-
-const CustomTab = () => <span>TV</span>;
-
-function fullScreen() {
-  const cursorPosition = this.quill.getSelection().index;
-  this.quill.insertText(cursorPosition, "★");
-  this.quill.setSelection(cursorPosition + 1);
-}
+import Tv from '@mui/icons-material/Tv';
+import Radio from '@mui/icons-material/Radio';
+import Twitter from '@mui/icons-material/Twitter';
+import Instagram from '@mui/icons-material/Instagram';
 
 const CustomToolbarTabs = () => (
   <div id="toolbartabs">
@@ -16,8 +12,17 @@ const CustomToolbarTabs = () => (
     <button className="ql-underline" />
     <button className="ql-list" value="bullet" />
     <button className="ql-link" />
-    <button className="ql-fullScreen">
-      <CustomTab />
+    <button className="ql-tv">
+      <span><Tv/></span>
+    </button>
+    <button className="ql-radio">
+      <span><Radio/></span>
+    </button>
+    <button className="ql-twitter">
+      <span><Twitter/></span>
+    </button>
+    <button className="ql-instagram">
+      <span><Instagram/></span>
     </button>
   </div>
 );
@@ -25,13 +30,13 @@ const CustomToolbarTabs = () => (
 class EditorWithTabs extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { editorHtml: props.value };
+    this.state = { editorHtml: props.value + "", oldText : ""  };
     this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidUpdate = (props) => {
-    console.log(props.value);
-    if (props.value !== this.state.editorHtml) {
+    if (props.value !== this.state.oldText) {
+      this.state.oldText = props.value;
       this.handleChange(props.value);
     }
   }

@@ -1,15 +1,35 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
+import OpenInFull from '@mui/icons-material/OpenInFull';
 
-const CustomButton = () => <span>F</span>;
+const CustomButton = () => <span><OpenInFull/></span>;
 
 function fullScreen() {
-  const cursorPosition = this.quill.getSelection().index;
-  this.quill.insertText(cursorPosition, "★");
-  this.quill.setSelection(cursorPosition + 1);
+  const elem = document.body;
+  if ((document.fullScreenElement !== undefined && document.fullScreenElement === null) || (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) || (document.mozFullScreen !== undefined && !document.mozFullScreen) || (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen)) {
+      if (elem.requestFullScreen) {
+          elem.requestFullScreen();
+      } else if (elem.mozRequestFullScreen) {
+          elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullScreen) {
+          elem.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+      } else if (elem.msRequestFullscreen) {
+          elem.msRequestFullscreen();
+      }
+  } else {
+      if (document.cancelFullScreen) {
+          document.cancelFullScreen();
+      } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+      } else if (document.webkitCancelFullScreen) {
+          document.webkitCancelFullScreen();
+      } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+      }
+  }
 }
 
-const CustomToolbar = () => (
+const CustomToolbar = () => ( 
   <div id="toolbar">
     <button className="ql-bold" />
     <button className="ql-italic" />
@@ -25,13 +45,42 @@ const CustomToolbar = () => (
 class Editor extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { editorHtml: props.value + "" };
+    this.state = { editorHtml: props.value, oldText : "" };
     this.handleChange = this.handleChange.bind(this);
+    
+    this.modules = {
+      toolbar: {
+        container: "#toolbar",
+        handlers: {
+          fullScreen: fullScreen
+        }
+      },
+      clipboard: {
+        matchVisual: false,
+      }
+    };
+  
+    this.formats = [
+      "header",
+      "font",
+      "size",
+      "bold",
+      "italic",
+      "underline",
+      "strike",
+      "blockquote",
+      "list",
+      "bullet",
+      "indent",
+      "link",
+      "image",
+      "color"
+    ];
   }
 
   componentDidUpdate = (props) => {
-    console.log(props.value);
-    if (props.value !== this.state.editorHtml) {
+    if (props.value !== this.state.oldText) {
+      this.state.oldText = props.value;
       this.handleChange(props.value);
     }
   }
@@ -49,8 +98,8 @@ class Editor extends React.Component {
           value={this.state.editorHtml}
           onChange={this.handleChange}
           placeholder={this.props.placeholder}
-          modules={Editor.modules}
-          formats={Editor.formats}
+          modules={this.modules}
+          formats={this.formats}
           theme={"snow"}
           defaultValue=''
         />
@@ -58,42 +107,5 @@ class Editor extends React.Component {
     );
   }
 }
-
-/* 
- * Quill modules to attach to editor
- * See https://quilljs.com/docs/modules/ for complete options
- */
-Editor.modules = {
-  toolbar: {
-    container: "#toolbar",
-    handlers: {
-      fullScreen: fullScreen
-    }
-  },
-  clipboard: {
-    matchVisual: false,
-  }
-};
-
-/* 
- * Quill editor formats
- * See https://quilljs.com/docs/formats/
- */
-Editor.formats = [
-  "header",
-  "font",
-  "size",
-  "bold",
-  "italic",
-  "underline",
-  "strike",
-  "blockquote",
-  "list",
-  "bullet",
-  "indent",
-  "link",
-  "image",
-  "color"
-];
 
 export default Editor;
