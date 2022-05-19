@@ -2,8 +2,8 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
-import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
+import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -82,6 +82,14 @@ export default function SideBarDrawer() {
                                 <ListItemText primary="ANP: Maxima op staatsbezoek Malta" secondary="Deze ochtend bezoekt Konigin Maxima het staatshoofd van Malta..."/>
                             </ListItemButton>
                         </ListItem>
+                        <ListItem disablePadding>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <Campaign />
+                                </ListItemIcon>
+                                <ListItemText primary="ANP: Legodozen overal uitverkocht" secondary="Lego kan de vraag naar nieuwe dozen niet bijhouden..."/>
+                            </ListItemButton>
+                        </ListItem>
                     </List>
                 </Box>
             </Drawer>
@@ -107,7 +115,7 @@ export default function SideBarDrawer() {
             <Drawer variant="persistent" anchor={anchorC} open={stateC[anchorC]} onClose={toggleDrawerC(anchorC, false)} PaperProps={{sx:{height: 'calc(100% - 77px)', top: '77px',}}}>
                 <Box m={1} display="flex" justifyContent="flex-end" alignItems="flex-end" sx={{paddingRight: '10px'}}>
                   <TextField id="standard-basic" label="Zoek media" variant="standard" sx={{width: '55%', marginRight: '10px', color:'#bf2133', borderColor:'#bf2133'}}/>
-                    <Button variant="outlined" sx={{color:'#bf2133', borderColor:'#bf2133'}} onClick={toggleDrawerC(anchorC, false)} onKeyDown={toggleDrawerC(anchorC, false)} startIcon={<Close/>}>Sluit Mediabank</Button>
+                  <Button variant="outlined" sx={{color:'#bf2133', borderColor:'#bf2133'}} onClick={toggleDrawerC(anchorC, false)} onKeyDown={toggleDrawerC(anchorC, false)} startIcon={<Close/>}>Sluit Mediabank</Button>
                 </Box>
                 <Divider/>
                 <Box sx={{ width: anchorC === 'top' || anchorC === 'bottom' ? 'auto' : 462 }} role="presentation">

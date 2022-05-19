@@ -30,6 +30,6 @@
     color: antiquewhite;
 }
 
-.MuiButton-root:hover {
+.bttn > a > .MuiButton-root:hover {
     background-color: #f4364c !important;
 }
