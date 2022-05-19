@@ -29,3 +29,7 @@
     background-color: #bf2133;
     color: antiquewhite;
 }
+
+.MuiButton-root:hover {
+    background-color: #f4364c !important;
+}

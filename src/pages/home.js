@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid } from '@mui/material';
+import Button from '@mui/material/Button';
 import "../styles/home.css";
 
 const Home = () => {
@@ -10,13 +11,13 @@ const Home = () => {
                 <h3 className='titel'>Home</h3>
                 <div className='bttn'>
                     <Link to='/stories'>
-                        <button>Stories</button>
+                        <Button variant="contained" size="large" sx={{width:'90%', marginBottom:'25px', color:'white', backgroundColor:'#bf2133'}}>Stories</Button>
                     </Link>
                     <Link to='/draaiboeken'>
-                        <button>Draaiboeken</button>
+                        <Button variant="contained" size="large" sx={{width:'90%', marginBottom:'25px', color:'white', backgroundColor:'#bf2133'}}>Draaiboeken</Button>
                     </Link>
                     <Link to='/media'>
-                        <button>Media</button>
+                        <Button variant="contained" size="large" sx={{width:'90%', color:'white', backgroundColor:'#bf2133'}}>Media</Button>
                     </Link>
                 </div>
             </Grid>

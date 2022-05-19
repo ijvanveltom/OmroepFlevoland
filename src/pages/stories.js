@@ -13,75 +13,55 @@ import SideBarDrawer from '../components/SideBarDrawer';
 import 'react-quill/dist/quill.snow.css';
 
 const StoryPage = () =>{
-//Metadata values
-const [status, setStatus] = React.useState('10');
-const handleStatusChange = (event) => {
-  setStatus(event.target.value);
-};
+  //Metadata values
+  const [status, setStatus] = React.useState('10');
+  const handleStatusChange = (event) => {
+    setStatus(event.target.value);
+  };
 
-const [Office, setOffice] = React.useState("10");
-const handleOfficeChange = (event) => {
-  setOffice(event.target.value);
-};
+  const [Office, setOffice] = React.useState("10");
+  const handleOfficeChange = (event) => {
+    setOffice(event.target.value);
+  };
 
-const dateNow = new Date(); // Creating a new date object with the current date and time
-const year = dateNow.getFullYear(); // Getting current year from the created Date object
-const monthWithOffset = dateNow.getUTCMonth() + 1; // January is 0 by default in JS. Offsetting +1 to fix date for calendar.
-const month = // Setting current Month number from current Date object
-  monthWithOffset.toString().length < 2 // Checking if month is < 10 and pre-prending 0 to adjust for date input.
-    ? `0${monthWithOffset}`
-    : monthWithOffset;
-const date =
-  dateNow.getUTCDate().toString().length < 2 // Checking if date is < 10 and pre-prending 0 if not to adjust for date input.
-    ? `0${dateNow.getUTCDate()}`
-    : dateNow.getUTCDate();
+    //data values
+  const [title, setTitle] = useState('')
 
-const materialDateInput = `${year}-${month}-${date}`; // combining to format for defaultValue or value attribute of material <TextField>
+  const handleSubmit = async (e) => {
+  e.preventDefault()
+  try {
+    await addDoc(collection(db, 'tasks'), {
+      title: title,
+    })
+  // onClose()
+  } catch (err) {
+    alert(err)
+  }
+  }
 
-var userName = "Jarlaxle Baenre";
+  //taskmanager.js
+  const [openAddModal, setOpenAddModal] = useState(false)
+  const [openEditModal, setOpenEditModal] = useState(false)
+  const [tasks, setTasks] = useState([])
+  const [selectForEdit, setSelectForEdit] = useState('')
 
-//Editor values
-const [valueLeft, setValueLeft] = useState('');
-const [valueRight, setValueRight] = useState('');
-
-  //data values
-const [title, setTitle] = useState('')
-
-const handleSubmit = async (e) => {
-e.preventDefault()
-try {
-  await addDoc(collection(db, 'tasks'), {
-    title: title,
+  /* function to get all tasks from firestore in realtime */ 
+  useEffect(() => {
+  const taskColRef = query(collection(db, 'tasks'), orderBy('created', 'desc'))
+  onSnapshot(taskColRef, (snapshot) => {
+    setTasks(snapshot.docs.map(doc => ({
+      id: doc.id,
+      data: doc.data()
+    })))
   })
- // onClose()
-} catch (err) {
-  alert(err)
-}
-}
+  },[])
 
-//taskmanager.js
-const [openAddModal, setOpenAddModal] = useState(false)
-const [openEditModal, setOpenEditModal] = useState(false)
-const [tasks, setTasks] = useState([])
-const [selectForEdit, setSelectForEdit] = useState('')
-
-/* function to get all tasks from firestore in realtime */ 
-useEffect(() => {
-const taskColRef = query(collection(db, 'tasks'), orderBy('created', 'desc'))
-onSnapshot(taskColRef, (snapshot) => {
-  setTasks(snapshot.docs.map(doc => ({
-    id: doc.id,
-    data: doc.data()
-  })))
-})
-},[])
-
-const clickFix = (task) =>{
-  setOpenEditModal(false);
-  setOpenAddModal(false);
-  setOpenEditModal(true);
-  setSelectForEdit(task);
-}
+  const clickFix = (task) =>{
+    setOpenEditModal(false);
+    setOpenAddModal(false);
+    setOpenEditModal(true);
+    setSelectForEdit(task);
+  }
 
   return (
     <Box sx={{width:'100%', height: '100%', overflow: 'hidden', display: 'flex',}}>
@@ -89,11 +69,9 @@ const clickFix = (task) =>{
       <SideBarDrawer/>
     </Box>
     <Box sx={{width:'20%', height: '100%', overflow: 'auto', borderTop: '1px solid #c4c4c4', paddingTop:'15px'}}>
-      
     <div className='taskManager'>
       <div className='taskManager__container'>
-      <button className='addStory' onClick={() => {setOpenAddModal(true); setOpenEditModal(false)}}> Nieuwe Story + </button>
-
+      <button className='addStory' onClick={() => {setOpenAddModal(true); setOpenEditModal(false)}}>+&nbsp;Nieuwe Story</button>
         <div className='taskManager__tasks' style={{marginTop:'15px'}}>
           {tasks.map((task) => (
             <Task

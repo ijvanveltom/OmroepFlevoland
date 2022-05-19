@@ -15,9 +15,9 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 const Navbar = () => {
     return (
         <div className='navbar'>
-            <a href='/'>
+            <NavLink to="/">
                 <img className='logo' alt="logo" src={logo} />
-            </a>
+            </NavLink>
 
             <nav className='menu'>
                 <ul>
@@ -34,8 +34,7 @@ const Navbar = () => {
             </nav>
 
             <div className='timer'>
-                <AccessTimeIcon />
-                <Clock format={'HH:mm:ss'} ticking={true} timezone={'Europe/Amsterdam'} />
+                <AccessTimeIcon />&nbsp;<Clock format={'HH:mm:ss'} ticking={true} timezone={'Europe/Amsterdam'} />
             </div>
 
             
@@ -45,9 +44,6 @@ const Navbar = () => {
                 </li>
                 <li>
                     <Link to="/#"><GridViewIcon /></Link>
-                </li>
-                <li>
-                    <Link to="/#"><CreateIcon /></Link>
                 </li>
                 <li>
                     <Link to="/#"><AccountCircleIcon /></Link>
