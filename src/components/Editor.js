@@ -79,9 +79,12 @@ class Editor extends React.Component {
   }
 
   componentDidUpdate = (props) => {
-    if (props.value !== this.state.oldText) {
-      this.state.oldText = props.value;
-      this.handleChange(props.value);
+    console.log(props.editing);
+    if(props.editing == "true") {
+      if (props.value !== this.state.oldText) {
+        this.state.oldText = props.value;
+        this.handleChange(props.value);
+      }
     }
   }
 

@@ -203,6 +203,7 @@ const EditTask = (props) =>  {
                       theme="snow"
                       value={props.textLeft}
                       onChange={(e) => setTextLeft(e)}
+                      editing="true"
                       sx={{ width: '100%', height: '100%' }} />
                   </Box>
                   <Box sx={{ display: 'flex', width: '50%', height: '100%', overflow: 'auto', }}>
@@ -211,6 +212,7 @@ const EditTask = (props) =>  {
                       theme="snow"
                       value={props.textRight}
                       onChange={(e) => setTextRight(e)}
+                      editing="true"
                       sx={{ width: '100%', height: '100%', }} />
                   </Box>
                 </Box>

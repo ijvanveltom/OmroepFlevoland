@@ -223,15 +223,19 @@ function AddTask({ onClick, open }) {
                   <Box sx={{ display: 'flex', width: '50%', height: '100%', overflow: 'auto', }}>
                     <Editor
                       placeholder={"Begin een verhaal..."}
-                      theme="snow" value={textLeft}
+                      theme="snow"
+                      value={textLeft}
                       onChange={(e) => setTextLeft(e)}
+                      editing="false"
                       sx={{ width: '100%', height: '100%' }} />
                   </Box>
                   <Box sx={{ display: 'flex', width: '50%', height: '100%', overflow: 'auto', }}>
                     <EditorWithTabs
                       placeholder={"Begin een verhaal..."}
-                      theme="snow" value={textRight}
+                      theme="snow"
+                      value={textRight}
                       onChange={(e) => setTextRight(e)}
+                      editing="false"
                       sx={{ width: '100%', height: '100%', }} />
                   </Box>
                 </Box>
